@@ -1,0 +1,189 @@
+database: "[ENTER_MONGODB_DATABASE_URL_HERE]"
+devices:
+  -
+    id: 1
+    name: RPI_HOME
+sensors:
+  -
+    id: 1
+    name: FRONT_DOOR
+    type: DOOR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      pin: 21
+    events:
+      open: RISING
+      close: FALLING
+  -
+    id: 2
+    name: TEMPERATURE
+    type: ENV_SENSOR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      measurement: temperature
+      sea_level_pressure: 1013.25
+    commands:
+      current: get_temperature
+    events:
+      high_breach: 100.0
+      low_breach: 15.0
+  -
+    id: 3
+    name: HUMIDITY
+    type: ENV_SENSOR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      measurement: humidity
+      sea_level_pressure: 1013.25
+    commands:
+      current: get_humidity
+    events:
+      high_breach: 75.0
+      low_breach: 10.0
+  -
+    id: 4
+    name: PRESSURE
+    type: ENV_SENSOR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      measurement: pressure
+      sea_level_pressure: 1013.25
+    commands:
+      current: get_pressure
+    events:
+      high_breach: 32.0
+      low_breach: 28.0
+  -
+    id: 5
+    name: ALTITUDE
+    type: ENV_SENSOR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      measurement: altitude
+      sea_level_pressure: 1013.25
+  -
+    id: 6
+    name: OUTSIDE_CAMERA
+    type: CAMERA
+    device_id: 1
+    polling_seconds: 20
+    bucket_size: 40
+    sensor_info:
+      id: camera
+    commands:
+      capture: take_picture
+    events:
+      open: take_picture
+      close: take_picture
+  -
+    id: 7
+    name: DINING_ROOM
+    type: LIGHT
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      pin: 5
+    commands:
+      flip: flip
+      turn_on: on
+      turn_off: off
+    events:
+      open: on
+      close: off
+  -
+    id: 8
+    name: MASTER_BEDROOM
+    type: LIGHT
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      pin: 6
+    commands:
+      flip: flip
+      turn_on: on
+      turn_off: off
+  -
+    id: 9
+    name: BEDROOM
+    type: LIGHT
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      pin: 13
+    commands:
+      flip: flip
+      turn_on: on
+      turn_off: off
+  -
+    id: 10
+    name: LIVING_ROOM
+    type: LIGHT
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      pin: 19
+    commands:
+      flip: flip
+      turn_on: on
+      turn_off: off
+    events:
+      open: on
+      close: off
+  -
+    id: 11
+    name: ROOF_PANEL_1
+    type: SOLAR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      shunt_ohms: 0.1
+      max_expected_amps: 0.5
+      addr: 0x40
+  -
+    id: 12
+    name: ROOF_PANEL_2
+    type: SOLAR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      shunt_ohms: 0.1
+      max_expected_amps: 0.5
+      addr: 0x41
+  -
+    id: 13
+    name: ROOF_PANEL_3
+    type: SOLAR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      shunt_ohms: 0.1
+      max_expected_amps: 0.5
+      addr: 0x44
+  -
+    id: 14
+    name: ROOF_PANEL_4
+    type: SOLAR
+    device_id: 1
+    polling_seconds: 5
+    bucket_size: 200
+    sensor_info:
+      shunt_ohms: 0.1
+      max_expected_amps: 0.5
+      addr: 0x45

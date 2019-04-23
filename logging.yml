@@ -1,0 +1,29 @@
+version: 1
+formatters:
+  simple:
+    format: '[%(asctime)s][%(filename)s:%(lineno)s - %(name)s.%(funcName)s()][%(levelname)s][msg:%(message)s]'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  info:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: simple
+    filename: iot.log
+    maxBytes: 10485760
+    backupCount: 20
+    encoding: 'utf-8'
+  error:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: simple
+    filename: iot.error.log
+    maxBytes: 10485760
+    backupCount: 20
+    encoding: 'utf-8'
+root:
+  level: INFO
+  handlers: [console, info, error]
