@@ -9,6 +9,7 @@ from threading import Timer
 class SensorPolling(object):
     """
     Responsible for running sensor object
+    TODO: make this an extension of the BaseObject and Polling Sensors can inherit from this?
     """
     def __init__(self, coll, sensor_obj):
         self._timer = None
