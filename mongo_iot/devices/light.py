@@ -3,6 +3,10 @@ from .base_sensor import Sensor
 
 import RPi.GPIO as GPIO
 
+ON=True
+OFF=False
+
+
 class Light(Sensor):
     def __init__(self, device_id, sensor_id, sensor_name, sensor_info, polling_seconds=5, bucket_size=200):
         """
@@ -54,3 +58,24 @@ class Light(Sensor):
             'timestamp': dt.now(),
             'value': GPIO.input(self._sensor_info['pin'])
         }
+
+    def execute_cmd(self, cmd):
+        """
+
+        :param cmd:
+        :return:
+        """
+        if cmd:
+            GPIO.output(self._sensor_info['pin'], GPIO.HIGH)
+        else:
+            GPIO.output(self._sensor_info['pin'], GPIO.LOW)
+        return self.get_sensor_data()
+
+    def register_event(self, evt):
+        """
+        TODO: Implement what? and how?
+
+        :param evt:
+        :return:
+        """
+        pass

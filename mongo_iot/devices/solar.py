@@ -69,6 +69,25 @@ class Solar(Sensor):
             'timestamp': dt.now(),
             'value': {
                 'voltage': self._panel_addr.voltage(),
-                'current': self._panel_addr.current()
+                'current': self._panel_addr.current(),
+                'power': self._panel_addr.voltage() * self._panel_addr.current()
             }
         }
+
+    def execute_cmd(self, cmd):
+        """
+        TODO: what to execute? get current power?
+
+        :param cmd:
+        :return:
+        """
+        pass
+
+    def register_event(self, evt):
+        """
+        TODO: Implement what? and how?
+
+        :param evt:
+        :return:
+        """
+        pass

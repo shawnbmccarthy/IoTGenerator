@@ -72,3 +72,20 @@ class Camera(Sensor):
             'timestamp': dt.now(),
             'value': self._take_picture()
         }
+
+    def execute_cmd(self, cmd):
+        """
+
+        :param cmd:
+        :return:
+        """
+        return self.get_sensor_data()
+
+    def register_event(self, evt):
+        """
+        TODO: Implement what? and how?
+
+        :param evt:
+        :return:
+        """
+        pass

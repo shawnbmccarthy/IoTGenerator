@@ -40,7 +40,7 @@ class Sensor(ABC):
         :param key:
         :return:
         """
-        self.__dict__[key]
+        return self.__dict__[key]
 
     def __contains__(self, key):
         """

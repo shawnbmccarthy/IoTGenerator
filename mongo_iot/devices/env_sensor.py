@@ -47,3 +47,20 @@ class EnvSensor(Sensor):
             'timestamp': dt.now(),
             'value': getattr(self._bme280, self._sensor_info['measurement'])
         }
+
+    def execute_cmd(self, cmd):
+        """
+
+        :param cmd:
+        :return:
+        """
+        pass
+
+    def register_event(self, evt):
+        """
+        TODO: Implement breaches maybe?
+
+        :param evt:
+        :return:
+        """
+        pass

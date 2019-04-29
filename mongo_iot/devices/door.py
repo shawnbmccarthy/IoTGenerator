@@ -47,3 +47,20 @@ class Door(Sensor):
             'timestamp': dt.now(),
             'value': GPIO.input(self._sensor_info['pin'])
         }
+
+    def execute_cmd(self, cmd):
+        """
+
+        :param cmd:
+        :return:
+        """
+        pass
+
+    def register_event(self, evt):
+        """
+        TODO: Implement rise and fall -> need to test
+
+        :param evt:
+        :return:
+        """
+        pass

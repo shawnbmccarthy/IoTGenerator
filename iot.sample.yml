@@ -14,8 +14,8 @@ sensors:
     sensor_info:
       pin: 21
     events:
-      open: RISING
-      close: FALLING
+      - open
+      - close
   -
     id: 2
     name: TEMPERATURE
@@ -27,10 +27,10 @@ sensors:
       measurement: temperature
       sea_level_pressure: 1013.25
     commands:
-      current: get_temperature
+      - temperature
     events:
-      high_breach: 100.0
-      low_breach: 15.0
+      - high: 100.0
+      - low: 15.0
   -
     id: 3
     name: HUMIDITY
@@ -42,10 +42,10 @@ sensors:
       measurement: humidity
       sea_level_pressure: 1013.25
     commands:
-      current: get_humidity
+      - humidity
     events:
-      high_breach: 75.0
-      low_breach: 10.0
+      - high_: 75.0
+      - low: 10.0
   -
     id: 4
     name: PRESSURE
@@ -57,10 +57,10 @@ sensors:
       measurement: pressure
       sea_level_pressure: 1013.25
     commands:
-      current: get_pressure
+      - pressure
     events:
-      high_breach: 32.0
-      low_breach: 28.0
+      - high: 32.0
+      - low: 28.0
   -
     id: 5
     name: ALTITUDE
@@ -71,6 +71,8 @@ sensors:
     sensor_info:
       measurement: altitude
       sea_level_pressure: 1013.25
+    commands:
+      - altitude
   -
     id: 6
     name: OUTSIDE_CAMERA
@@ -81,10 +83,10 @@ sensors:
     sensor_info:
       id: camera
     commands:
-      capture: take_picture
+      - take_picture
     events:
-      open: take_picture
-      close: take_picture
+      - open: take_picture
+      - close: take_picture
   -
     id: 7
     name: DINING_ROOM
@@ -95,12 +97,12 @@ sensors:
     sensor_info:
       pin: 5
     commands:
-      flip: flip
-      turn_on: on
-      turn_off: off
+      - flip
+      - on
+      - off
     events:
-      open: on
-      close: off
+      - open: on
+      - close: off
   -
     id: 8
     name: MASTER_BEDROOM
@@ -111,9 +113,9 @@ sensors:
     sensor_info:
       pin: 6
     commands:
-      flip: flip
-      turn_on: on
-      turn_off: off
+      - flip
+      - on
+      - off
   -
     id: 9
     name: BEDROOM
@@ -124,9 +126,9 @@ sensors:
     sensor_info:
       pin: 13
     commands:
-      flip: flip
-      turn_on: on
-      turn_off: off
+      - flip
+      - on
+      - off
   -
     id: 10
     name: LIVING_ROOM
@@ -137,12 +139,12 @@ sensors:
     sensor_info:
       pin: 19
     commands:
-      flip: flip
-      turn_on: on
-      turn_off: off
+      - flip
+      - on
+      - off
     events:
-      open: on
-      close: off
+      - open: on
+      - close: off
   -
     id: 11
     name: ROOF_PANEL_1
