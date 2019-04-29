@@ -1,8 +1,9 @@
 from datetime import datetime as dt
 import logging
 
+from abc import ABC, abstractmethod
 
-class Sensor:
+class Sensor(ABC):
     """
     The Sensor class will simply hold the data for the given sensor and provide the methods needed
     to allow the higher level classes to pull data and send update the datasource as needed
@@ -31,6 +32,7 @@ class Sensor:
         self._bucket_size = bucket_size
         self._sensor_info = sensor_info
         self._logger = logging.getLogger(__name__)
+        super().__init__()
 
     def __getitem__(self, key):
         """
@@ -83,6 +85,7 @@ class Sensor:
         """
         return self._bucket_size
 
+    @abstractmethod
     def setup_device(self):
         """
 
@@ -90,6 +93,7 @@ class Sensor:
         """
         raise NotImplemented('Base Sensor has nothing to setup')
 
+    @abstractmethod
     def get_sensor_data(self):
         """
 
@@ -97,6 +101,7 @@ class Sensor:
         """
         raise NotImplemented('Base Sensor class has nothing to executed')
 
+    @abstractmethod
     def execute_cmd(self, cmd):
         """
         the base sensor has not commands to execute
@@ -105,11 +110,11 @@ class Sensor:
         """
         raise NotImplemented('Base sensor class has no commands({}:NotSupported)'.format(cmd))
 
+    @abstractmethod
     def register_event(self, evt):
         """
-        the base sensor has no events to watch
 
-        :param cmd:
+        :param evt:
         :return:
         """
         raise NotImplemented('Base sensor class nos ne events: Not Supported')
