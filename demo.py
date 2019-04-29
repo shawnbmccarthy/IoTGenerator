@@ -3,7 +3,7 @@ import yaml
 
 from datetime import datetime as dt
 from mongo_iot.devices import SensorFactory
-from mongo_iot.utils import SensorPolling
+from mongo_iot.timeseries_processor import SensorPolling
 from pymongo import MongoClient
 
 
