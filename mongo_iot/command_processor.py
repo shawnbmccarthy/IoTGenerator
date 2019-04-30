@@ -5,15 +5,18 @@ from threading import Thread
 
 class CommandProcessor(Thread):
     def __init__(self, cmd_coll, sensor_coll):
+        super(CommandProcessor, self).__init__()
         self._cmd_coll = cmd_coll
         self._sensor_coll = sensor_coll
         self._is_running = True
         self._sensor_list = {}
         self._logger = logging.getLogger(__name__)
         self._resume_token = None
+        self._logger.info('command proccessor setup')
 
     def add_sensor(self, sensor):
         self._sensor_list[sensor.sensor_id] = sensor
+        self._logger.info('sensor added: {}:{}'.format(sensor.sensor_id, self._sensor_list[sensor.sensor_id].sensor_name))
 
     def run(self):
         """
@@ -24,16 +27,21 @@ class CommandProcessor(Thread):
         TODO: Fix this sensor current_state logic I don't like it -
         :return:
         """
-        try:
-            while self._is_running:
+        self._logger.info('command processor running')
+
+        while self._is_running:
+            try:
                 with self._cmd_coll.watch(
                     [{'$match': {'operationType': 'insert'}}]
                 ) as stream:
+                    self._logger.info('command processor inside watch')
                     for doc in stream:
                         self._resume_token = doc['_id']
                         cmd_doc = doc['fullDocument']
-                        sensor = cmd_doc['sensor_id']
-                        value = sensor.execute_cmd(cmd_doc['desired_state'])
+                        sensor_id = cmd_doc['sensor_id']
+                        self._logger.info('executing command for sensor id: {}'.format(sensor_id))
+                        sensor = self._sensor_list[sensor_id]
+                        ret_data = sensor.execute_cmd(cmd_doc['desired_state'])
                         try:
                             self._sensor_coll.update_one(
                                 {
@@ -43,7 +51,7 @@ class CommandProcessor(Thread):
                                 },
                                 {
                                     '$set': {
-                                        'current_state': value.current_state,
+                                        'current_state': ret_data['value'],
                                         'last_updated': dt.now()
                                     }
                                 }
@@ -51,8 +59,8 @@ class CommandProcessor(Thread):
                         except Exception as e:
                             self._logger.error('problem processing sensor command: {}, error: {}'.format(sensor.sensor_name, e))
                         pass
-        except Exception as e:
-            self._logger.error('problem running command: {}'.format(e))
+            except Exception as e:
+                    self._logger.error('problem running command: {}'.format(e))
 
     def stop(self):
         """

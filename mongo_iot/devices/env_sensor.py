@@ -37,7 +37,7 @@ class EnvSensor(Sensor):
 
         :return:
         """
-        self._logger.debug('attempting to get sensor data')
+        self._logger.debug('attempting to get environment sensor data')
         return {
             'device_id': self.device_id,
             'sensor_name': self.sensor_name,
@@ -54,7 +54,8 @@ class EnvSensor(Sensor):
         :param cmd:
         :return:
         """
-        pass
+        self._logger.info('running environment sensor command')
+        return self.get_sensor_data()
 
     def register_event(self, evt):
         """

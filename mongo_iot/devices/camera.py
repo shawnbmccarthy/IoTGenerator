@@ -62,7 +62,7 @@ class Camera(Sensor):
 
         :return:
         """
-        self._logger.debug('attempting to get sensor data')
+        self._logger.debug('attempting to get camera sensor data')
         return {
             'device_id': self.device_id,
             'sensor_name': self.sensor_name,
@@ -79,6 +79,7 @@ class Camera(Sensor):
         :param cmd:
         :return:
         """
+        self._logger.info('running camera command')
         return self.get_sensor_data()
 
     def register_event(self, evt):

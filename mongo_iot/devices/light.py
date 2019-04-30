@@ -1,10 +1,14 @@
+"""
+light.py
+TODO: document wierdness with relays!
+"""
 from datetime import datetime as dt
 from .base_sensor import Sensor
 
 import RPi.GPIO as GPIO
 
-ON=True
-OFF=False
+ON=GPIO.LOW
+OFF=GPIO.HIGH
 
 
 class Light(Sensor):
@@ -33,8 +37,9 @@ class Light(Sensor):
 
         :return:
         """
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._sensor_info['pin'], GPIO.OUT)
+        # turn off light
+        GPIO.output(self._sensor_info['pin'], OFF)
         self.current_state = GPIO.input(self._sensor_info['pin'])
         return {
             'sensor_name': self.sensor_name,
@@ -48,7 +53,7 @@ class Light(Sensor):
 
         :return:
         """
-        self._logger.debug('attempting to get sensor data')
+        self._logger.debug('attempting to light sensor data')
         return {
             'device_id': self.device_id,
             'sensor_name': self.sensor_name,
@@ -65,10 +70,13 @@ class Light(Sensor):
         :param cmd:
         :return:
         """
+        self._logger.info('running light sensor command')
         if cmd:
-            GPIO.output(self._sensor_info['pin'], GPIO.HIGH)
+            self._logger.info('setting light pin to high (turn light on)')
+            GPIO.output(self._sensor_info['pin'], ON)
         else:
-            GPIO.output(self._sensor_info['pin'], GPIO.LOW)
+            self._logger.info('setting light pin to low (turn lights off)')
+            GPIO.output(self._sensor_info['pin'], OFF)
         return self.get_sensor_data()
 
     def register_event(self, evt):

@@ -22,7 +22,6 @@ class Door(Sensor):
 
         :return:
         """
-        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self._sensor_info['pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.current_state = GPIO.input(self._sensor_info['pin'])
         return {
@@ -37,7 +36,7 @@ class Door(Sensor):
 
         :return:
         """
-        self._logger.debug('attempting to get sensor data')
+        self._logger.debug('attempting to get door sensor data')
         return {
             'device_id': self.device_id,
             'sensor_name': self.sensor_name,
@@ -54,6 +53,7 @@ class Door(Sensor):
         :param cmd:
         :return:
         """
+        self._logger.info('running door command (DO NOTHING)')
         pass
 
     def register_event(self, evt):

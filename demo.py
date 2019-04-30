@@ -1,7 +1,9 @@
 import logging.config
+import mongo_iot
 import yaml
 
 from datetime import datetime as dt
+
 from mongo_iot.devices import SensorFactory
 from mongo_iot.timeseries_processor import SensorPolling
 from mongo_iot.command_processor import CommandProcessor
@@ -26,6 +28,7 @@ if __name__ == '__main__':
     with open('./iot.yml', 'r') as yml_cfg:
         cfg = yaml.load(yml_cfg, Loader=yaml.SafeLoader)
 
+    mongo_iot.init()
     sensorFactory = SensorFactory()
     polling_sensors = []
 
@@ -74,7 +77,7 @@ if __name__ == '__main__':
         commands = sensor_cfg.get('commands', None)
         events = sensor_cfg.get('events', None)
         if commands:
-            logger.info('attempting to setup commands')
+            logger.info('adding {} to commands'.format(sensor.sensor_name))
             command_processor.add_sensor(sensor)
 
         if events:
@@ -84,3 +87,5 @@ if __name__ == '__main__':
 
     for poller in polling_sensors:
         poller.start()
+
+    command_processor.start()
