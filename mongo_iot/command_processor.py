@@ -31,6 +31,10 @@ class CommandProcessor(Thread):
 
         while self._is_running:
             try:
+                #
+                # TODO: What is the best way to cleanly shut down a change stream when a process is
+                # TODO: shutting down?
+                #
                 with self._cmd_coll.watch(
                     [{'$match': {'operationType': 'insert'}}]
                 ) as stream:
@@ -58,7 +62,6 @@ class CommandProcessor(Thread):
                             )
                         except Exception as e:
                             self._logger.error('problem processing sensor command: {}, error: {}'.format(sensor.sensor_name, e))
-                        pass
             except Exception as e:
                     self._logger.error('problem running command: {}'.format(e))
 

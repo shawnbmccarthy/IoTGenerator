@@ -82,7 +82,15 @@ class Camera(Sensor):
         self._logger.info('running camera command')
         return self.get_sensor_data()
 
-    def register_event(self, evt):
+    def register_event(self, evt_logger):
+        """
+
+        :param evt_logger:
+        :return:
+        """
+        pass
+
+    def event_callback(self, evt):
         """
         TODO: Implement what? and how?
 

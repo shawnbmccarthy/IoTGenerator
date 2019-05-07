@@ -14,8 +14,7 @@ sensors:
     sensor_info:
       pin: 21
     events:
-      - open
-      - close
+      handler: mongo_iot.event_process.EventDatabaseLogger
   -
     id: 2
     name: TEMPERATURE
@@ -28,9 +27,6 @@ sensors:
       sea_level_pressure: 1013.25
     commands:
       - temperature
-    events:
-      - high: 100.0
-      - low: 15.0
   -
     id: 3
     name: HUMIDITY
@@ -43,9 +39,6 @@ sensors:
       sea_level_pressure: 1013.25
     commands:
       - humidity
-    events:
-      - high_: 75.0
-      - low: 10.0
   -
     id: 4
     name: PRESSURE
@@ -58,9 +51,6 @@ sensors:
       sea_level_pressure: 1013.25
     commands:
       - pressure
-    events:
-      - high: 32.0
-      - low: 28.0
   -
     id: 5
     name: ALTITUDE
@@ -84,9 +74,6 @@ sensors:
       id: camera
     commands:
       - take_picture
-    events:
-      - open: take_picture
-      - close: take_picture
   -
     id: 7
     name: DINING_ROOM
@@ -95,14 +82,11 @@ sensors:
     polling_seconds: 5
     bucket_size: 200
     sensor_info:
-      pin: 5
+      pin: 6
     commands:
       - flip
       - on
       - off
-    events:
-      - open: on
-      - close: off
   -
     id: 8
     name: MASTER_BEDROOM
@@ -111,7 +95,7 @@ sensors:
     polling_seconds: 5
     bucket_size: 200
     sensor_info:
-      pin: 6
+      pin: 13
     commands:
       - flip
       - on
@@ -124,7 +108,7 @@ sensors:
     polling_seconds: 5
     bucket_size: 200
     sensor_info:
-      pin: 13
+      pin: 19
     commands:
       - flip
       - on
@@ -137,14 +121,11 @@ sensors:
     polling_seconds: 5
     bucket_size: 200
     sensor_info:
-      pin: 19
+      pin: 5
     commands:
       - flip
       - on
       - off
-    events:
-      - open: on
-      - close: off
   -
     id: 11
     name: ROOF_PANEL_1

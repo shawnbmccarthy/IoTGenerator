@@ -32,6 +32,7 @@ class Sensor(ABC):
         self._bucket_size = bucket_size
         self._sensor_info = sensor_info
         self._logger = logging.getLogger(__name__)
+        self._evt_logger = None
         super().__init__()
 
     def __getitem__(self, key):
@@ -111,7 +112,16 @@ class Sensor(ABC):
         raise NotImplemented('Base sensor class has no commands({}:NotSupported)'.format(cmd))
 
     @abstractmethod
-    def register_event(self, evt):
+    def register_event(self, evt_logger):
+        """
+
+        :param evt_logger:
+        :return:
+        """
+        raise NotImplemented('Base sensor calls has not ability to register for events')
+
+    @abstractmethod
+    def event_callback(self, evt):
         """
 
         :param evt:

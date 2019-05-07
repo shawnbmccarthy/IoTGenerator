@@ -1,6 +1,8 @@
 """
 light.py
-TODO: document wierdness with relays!
+
+In our demo we are using dollhouse lights which are connected to relays, as well as a single switch.
+
 """
 from datetime import datetime as dt
 from .base_sensor import Sensor
@@ -66,20 +68,30 @@ class Light(Sensor):
 
     def execute_cmd(self, cmd):
         """
+        TODO: Document relay weirdness!
 
         :param cmd:
         :return:
         """
         self._logger.info('running light sensor command')
         if cmd:
-            self._logger.info('setting light pin to high (turn light on)')
+            self._logger.info('setting light pin to low (turn light on)')
             GPIO.output(self._sensor_info['pin'], ON)
         else:
-            self._logger.info('setting light pin to low (turn lights off)')
+            self._logger.info('setting light pin to high (turn lights off)')
             GPIO.output(self._sensor_info['pin'], OFF)
         return self.get_sensor_data()
 
-    def register_event(self, evt):
+    def register_event(self, evt_logger):
+        """
+
+        :param evt_logger:
+        :return:
+        """
+        pass
+
+
+    def event_callback(self, evt):
         """
         TODO: Implement what? and how?
 

@@ -24,6 +24,14 @@ handlers:
     maxBytes: 10485760
     backupCount: 20
     encoding: 'utf-8'
+  evt_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: simple
+    filename: evt.log
+    maxBytes: 10485760
+    backupCount: 20
+    encoding: 'utf-8'
 root:
   level: INFO
-  handlers: [info_handler, err_handler]
+  handlers: [info_handler, err_handler, evt_handler]

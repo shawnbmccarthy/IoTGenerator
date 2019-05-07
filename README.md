@@ -21,3 +21,13 @@ Can only run on raspberry pi
     1. events
 1. add requirements.txt
 1. document
+
+## Enhancements
+1. remove pi requirement from sensors
+1. remove mongo requirement/database requirement from processors
+1. introduce a dummy device for testing sensors without running on pi
+1. enhance event processing
+    1. event chain -> IFTTT type processing
+    1. event logging -> make richer event capturing
+1. command processing
+    1. command chain -> IFTTT type processing, i.e. media_mode -> dim lights turn on tv

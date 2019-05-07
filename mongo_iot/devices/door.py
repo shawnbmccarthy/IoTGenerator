@@ -56,11 +56,31 @@ class Door(Sensor):
         self._logger.info('running door command (DO NOTHING)')
         pass
 
-    def register_event(self, evt):
+    def register_event(self, evt_logger):
+        """
+
+        :param evt_logger:
+        :return:
+        """
+        self._logger.info('setting up door event handler (pin:{})'.format(self._sensor_info['pin']))
+        self._evt_logger = evt_logger
+        GPIO.add_event_detect(self._sensor_info['pin'], GPIO.BOTH, callback=self.event_callback)
+
+    def event_callback(self, evt):
         """
         TODO: Implement rise and fall -> need to test
 
         :param evt:
         :return:
         """
-        pass
+        self._logger.info('executing door event')
+        evt_data = self.get_sensor_data()
+        if GPIO.input(self._sensor_info['pin']): # 1
+            evt_data['msg'] = 'door is open'
+            evt_data['evt_type'] = 'DOOR_OPEN'
+        else:
+            evt_data['msg'] = 'door is closed'
+            evt_data['evt_type'] = 'DOOR_CLOSED'
+
+        self._logger.info('emitting door event: {}'.format(evt_data))
+        self._evt_logger.emit_event(evt_data)
